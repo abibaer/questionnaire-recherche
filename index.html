@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Questionnaire â€“ Entrepreneuriat Ã©tudiant</title>
+  <title>Questionnaire – Entrepreneuriat étudiant</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,7 @@
       margin: 0 auto;
     }
 
-    /* â”€â”€ Header â”€â”€ */
+    /* ── Header ── */
     .header {
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
       color: white;
@@ -63,7 +63,7 @@
       font-weight: 600;
     }
 
-    /* â”€â”€ Section cards â”€â”€ */
+    /* ── Section cards ── */
     .section {
       background: white;
       border-radius: 14px;
@@ -101,10 +101,8 @@
       border-bottom: 1px solid #f0f0f0;
     }
 
-    /* â”€â”€ Questions â”€â”€ */
-    .question {
-      margin-bottom: 24px;
-    }
+    /* ── Questions ── */
+    .question { margin-bottom: 24px; }
     .question:last-child { margin-bottom: 0; }
 
     .question-label {
@@ -119,7 +117,6 @@
       font-size: .82rem;
     }
 
-    /* Radio / Checkbox */
     .options { display: flex; flex-direction: column; gap: 8px; }
 
     .option {
@@ -142,11 +139,7 @@
     }
     .option span { font-size: .9rem; color: #333; line-height: 1.4; }
 
-    /* "Autre" inline input */
-    .other-input {
-      display: none;
-      margin-top: 8px;
-    }
+    .other-input { display: none; margin-top: 8px; }
     .other-input.visible { display: block; }
     .other-input input[type="text"] {
       width: 100%;
@@ -157,38 +150,25 @@
       outline: none;
     }
 
-    /* Likert matrix */
-    .likert-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
-    .likert-table thead th {
-      text-align: center;
-      padding: 8px 6px;
-      font-weight: 600;
-      color: #555;
-      font-size: .8rem;
+    /* Likert / frequency tables */
+    .likert-table, .freq-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .likert-table thead th, .freq-table thead th {
+      text-align: center; padding: 8px 6px;
+      font-weight: 600; color: #555; font-size: .8rem;
     }
-    .likert-table thead th:first-child { text-align: left; }
-    .likert-table tbody tr:nth-child(even) { background: #f8f9fc; }
-    .likert-table tbody td {
-      padding: 10px 6px;
-      text-align: center;
+    .likert-table thead th:first-child,
+    .freq-table thead th:first-child { text-align: left; }
+    .likert-table tbody tr:nth-child(even),
+    .freq-table tbody tr:nth-child(even) { background: #f8f9fc; }
+    .likert-table tbody td, .freq-table tbody td {
+      padding: 10px 6px; text-align: center;
       border-bottom: 1px solid #f0f0f0;
     }
-    .likert-table tbody td:first-child { text-align: left; padding-left: 4px; font-size: .87rem; color: #333; }
-    .likert-table input[type="radio"] { accent-color: #0f3460; width: 16px; height: 16px; }
-
-    /* Frequency matrix */
-    .freq-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
-    .freq-table thead th {
-      text-align: center; padding: 8px 4px;
-      font-weight: 600; color: #555; font-size: .78rem;
-    }
-    .freq-table thead th:first-child { text-align: left; }
-    .freq-table tbody tr:nth-child(even) { background: #f8f9fc; }
-    .freq-table tbody td { padding: 10px 4px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+    .likert-table tbody td:first-child,
     .freq-table tbody td:first-child { text-align: left; padding-left: 4px; font-size: .87rem; color: #333; }
+    .likert-table input[type="radio"],
     .freq-table input[type="radio"] { accent-color: #0f3460; width: 16px; height: 16px; }
 
-    /* Textarea */
     textarea {
       width: 100%;
       border: 1.5px solid #e0e0e0;
@@ -203,18 +183,12 @@
     }
     textarea:focus { border-color: #0f3460; }
 
-    /* Submit */
     .submit-area { text-align: center; margin-top: 10px; }
     .btn-submit {
       background: linear-gradient(135deg, #0f3460, #16213e);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 16px 52px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: .3px;
+      color: white; border: none; border-radius: 10px;
+      padding: 16px 52px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; letter-spacing: .3px;
       transition: opacity .2s, transform .1s;
       box-shadow: 0 4px 16px rgba(15,52,96,.35);
     }
@@ -222,45 +196,30 @@
     .btn-submit:active { transform: scale(.98); }
     .btn-submit:disabled { opacity: .5; cursor: not-allowed; }
 
-    /* Success / Error */
     #success-msg {
       display: none;
-      background: #eafaf1;
-      border: 2px solid #27ae60;
-      border-radius: 14px;
-      padding: 36px;
-      text-align: center;
-      color: #1a6e3c;
-      margin-top: 20px;
+      background: #eafaf1; border: 2px solid #27ae60;
+      border-radius: 14px; padding: 36px;
+      text-align: center; color: #1a6e3c; margin-top: 20px;
     }
     #success-msg h2 { font-size: 1.4rem; margin-bottom: 10px; }
     #success-msg p { font-size: .95rem; }
 
     #error-msg {
       display: none;
-      background: #fef0f0;
-      border: 1.5px solid #e74c3c;
-      border-radius: 10px;
-      padding: 14px 18px;
-      color: #c0392b;
-      font-size: .88rem;
-      margin-top: 14px;
-      text-align: center;
+      background: #fef0f0; border: 1.5px solid #e74c3c;
+      border-radius: 10px; padding: 14px 18px;
+      color: #c0392b; font-size: .88rem;
+      margin-top: 14px; text-align: center;
     }
 
-    /* Progress bar */
     .progress-bar-wrap {
-      background: #e0e0e0;
-      border-radius: 10px;
-      height: 6px;
-      margin-bottom: 24px;
-      overflow: hidden;
+      background: #e0e0e0; border-radius: 10px;
+      height: 6px; margin-bottom: 24px; overflow: hidden;
     }
     .progress-bar {
       background: linear-gradient(90deg, #0f3460, #e94560);
-      height: 100%;
-      border-radius: 10px;
-      width: 0%;
+      height: 100%; border-radius: 10px; width: 0%;
       transition: width .4s ease;
     }
 
@@ -276,479 +235,321 @@
 <body>
 <div class="container">
 
-  <!-- HEADER -->
   <div class="header">
-    <h1>Questionnaire â€“ Entrepreneuriat Ã©tudiant &amp; dispositifs d'accompagnement</h1>
-    <p class="subtitle">MÃ©moire de recherche acadÃ©mique</p>
+    <h1>Questionnaire &#8211; Entrepreneuriat &#233;tudiant &amp; dispositifs d&#8217;accompagnement</h1>
+    <p class="subtitle">M&#233;moire de recherche acad&#233;mique</p>
     <div class="intro">
-      Ce questionnaire s'inscrit dans un mÃ©moire de recherche sur l'entrepreneuriat Ã©tudiant et les dispositifs d'accompagnement (incubateurs, PÃ‰PITE, concours, etc.). Il vise Ã  identifier des personnes ayant candidatÃ© ou participÃ© Ã  un programme entrepreneurial, afin de leur proposer ensuite, si elles le souhaitent, un entretien plus approfondi.
+      Ce questionnaire s&#8217;inscrit dans un m&#233;moire de recherche sur l&#8217;entrepreneuriat &#233;tudiant et les dispositifs d&#8217;accompagnement (incubateurs, P&#201;PITE, concours, etc.). Il vise &#224; identifier des personnes ayant candidat&#233; ou particip&#233; &#224; un programme entrepreneurial, afin de leur proposer ensuite, si elles le souhaitent, un entretien plus approfondi.
     </div>
     <div class="meta">
-      <span class="badge">â± ~5 minutes</span>
-      <span class="badge">ðŸ”’ Anonyme</span>
-      <span class="badge">ðŸŽ“ Recherche acadÃ©mique</span>
+      <span class="badge">&#9201; ~5 minutes</span>
+      <span class="badge">&#128274; Anonyme</span>
+      <span class="badge">&#127891; Recherche acad&#233;mique</span>
     </div>
   </div>
 
-  <!-- PROGRESS -->
   <div class="progress-bar-wrap">
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
   <form id="mainForm" novalidate>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         SECTION 1 â€“ PROFIL
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- SECTION 1 -->
     <div class="section">
       <div class="section-title"><span class="section-num">1</span> Profil</div>
       <p class="section-note">Quelques informations sur ton parcours.</p>
 
-      <!-- 1.1 -->
       <div class="question">
-        <div class="question-label">1.1 Quel est ton statut actuel ?</div>
+        <div class="question-label">1.1 Quel est ton statut actuel&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q1_1" value="Ã‰tudiant" required><span>Ã‰tudiantÂ·e</span></label>
-          <label class="option"><input type="radio" name="q1_1" value="Jeune diplÃ´mÃ©"><span>Jeune diplÃ´mÃ©Â·e</span></label>
-          <label class="option"><input type="radio" name="q1_1" value="SalariÃ©"><span>SalariÃ©Â·e</span></label>
-          <label class="option"><input type="radio" name="q1_1" value="Entrepreneur Ã  temps partiel"><span>EntrepreneurÂ·e Ã  temps partiel</span></label>
-          <label class="option"><input type="radio" name="q1_1" value="Entrepreneur Ã  temps plein"><span>EntrepreneurÂ·e Ã  temps plein</span></label>
-          <label class="option" id="opt_1_1_autre">
-            <input type="radio" name="q1_1" value="Autre" onchange="toggleOther('other_1_1', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_1_1"><input type="text" name="q1_1_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q1_1" value="Etudiant" required><span>&#201;tudiant&#183;e</span></label>
+          <label class="option"><input type="radio" name="q1_1" value="Jeune diplome"><span>Jeune diplom&#233;&#183;e</span></label>
+          <label class="option"><input type="radio" name="q1_1" value="Salarie"><span>Salari&#233;&#183;e</span></label>
+          <label class="option"><input type="radio" name="q1_1" value="Entrepreneur temps partiel"><span>Entrepreneur&#183;e &#224; temps partiel</span></label>
+          <label class="option"><input type="radio" name="q1_1" value="Entrepreneur temps plein"><span>Entrepreneur&#183;e &#224; temps plein</span></label>
+          <label class="option"><input type="radio" name="q1_1" value="Autre" onchange="showOther('other_1_1',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_1_1"><input type="text" name="q1_1_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 1.2 -->
       <div class="question">
-        <div class="question-label">1.2 Ã€ quel moment as-tu candidatÃ© ou participÃ© Ã  un dispositif entrepreneurial ?</div>
+        <div class="question-label">1.2 &#192; quel moment as-tu candidat&#233; ou particip&#233; &#224; un dispositif entrepreneurial&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q1_2" value="Pendant mes Ã©tudes" required><span>Pendant mes Ã©tudes</span></label>
-          <label class="option"><input type="radio" name="q1_2" value="Juste aprÃ¨s mes Ã©tudes"><span>Juste aprÃ¨s mes Ã©tudes</span></label>
-          <label class="option"><input type="radio" name="q1_2" value="AprÃ¨s une premiÃ¨re expÃ©rience professionnelle"><span>AprÃ¨s une premiÃ¨re expÃ©rience professionnelle</span></label>
-          <label class="option"><input type="radio" name="q1_2" value="Candidature sans participation"><span>Je n'y ai pas encore participÃ© mais j'ai dÃ©jÃ  candidatÃ©</span></label>
-          <label class="option">
-            <input type="radio" name="q1_2" value="Autre" onchange="toggleOther('other_1_2', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_1_2"><input type="text" name="q1_2_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q1_2" value="Pendant mes etudes" required><span>Pendant mes &#233;tudes</span></label>
+          <label class="option"><input type="radio" name="q1_2" value="Juste apres mes etudes"><span>Juste apr&#232;s mes &#233;tudes</span></label>
+          <label class="option"><input type="radio" name="q1_2" value="Apres experience pro"><span>Apr&#232;s une premi&#232;re exp&#233;rience professionnelle</span></label>
+          <label class="option"><input type="radio" name="q1_2" value="Candidature sans participation"><span>Je n&#8217;y ai pas encore particip&#233; mais j&#8217;ai d&#233;j&#224; candidat&#233;</span></label>
+          <label class="option"><input type="radio" name="q1_2" value="Autre" onchange="showOther('other_1_2',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_1_2"><input type="text" name="q1_2_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 1.3 -->
       <div class="question">
-        <div class="question-label">1.3 Dans quel type de formation Ã©tais-tu au moment du projet ?</div>
+        <div class="question-label">1.3 Dans quel type de formation &#233;tais-tu au moment du projet&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q1_3" value="UniversitÃ©" required><span>UniversitÃ©</span></label>
-          <label class="option"><input type="radio" name="q1_3" value="Grande Ã©cole de commerce"><span>Grande Ã©cole de commerce</span></label>
-          <label class="option"><input type="radio" name="q1_3" value="Grande Ã©cole d'ingÃ©nieurs"><span>Grande Ã©cole d'ingÃ©nieurs</span></label>
-          <label class="option"><input type="radio" name="q1_3" value="IUT / BTS"><span>IUT / BTS</span></label>
-          <label class="option">
-            <input type="radio" name="q1_3" value="Autre" onchange="toggleOther('other_1_3', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_1_3"><input type="text" name="q1_3_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q1_3" value="Universite" required><span>Universit&#233;</span></label>
+          <label class="option"><input type="radio" name="q1_3" value="Grande ecole commerce"><span>Grande &#233;cole de commerce</span></label>
+          <label class="option"><input type="radio" name="q1_3" value="Grande ecole ingenieurs"><span>Grande &#233;cole d&#8217;ing&#233;nieurs</span></label>
+          <label class="option"><input type="radio" name="q1_3" value="IUT BTS"><span>IUT / BTS</span></label>
+          <label class="option"><input type="radio" name="q1_3" value="Autre" onchange="showOther('other_1_3',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_1_3"><input type="text" name="q1_3_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 1.4 -->
       <div class="question">
-        <div class="question-label">1.4 Dans quel domaine principal Ã©tais-tu inscritÂ·e ?</div>
+        <div class="question-label">1.4 Dans quel domaine principal &#233;tais-tu inscrit&#183;e&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q1_4" value="Management / gestion" required><span>Management / gestion</span></label>
-          <label class="option"><input type="radio" name="q1_4" value="IngÃ©nierie / sciences dures"><span>IngÃ©nierie / sciences dures</span></label>
-          <label class="option"><input type="radio" name="q1_4" value="Sciences humaines et sociales"><span>Sciences humaines et sociales</span></label>
-          <label class="option"><input type="radio" name="q1_4" value="SantÃ© / mÃ©dico-social"><span>SantÃ© / mÃ©dico-social</span></label>
-          <label class="option"><input type="radio" name="q1_4" value="Arts / design / communication"><span>Arts / design / communication</span></label>
-          <label class="option">
-            <input type="radio" name="q1_4" value="Autre" onchange="toggleOther('other_1_4', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_1_4"><input type="text" name="q1_4_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q1_4" value="Management gestion" required><span>Management / gestion</span></label>
+          <label class="option"><input type="radio" name="q1_4" value="Ingenierie sciences dures"><span>Ing&#233;nierie / sciences dures</span></label>
+          <label class="option"><input type="radio" name="q1_4" value="Sciences humaines sociales"><span>Sciences humaines et sociales</span></label>
+          <label class="option"><input type="radio" name="q1_4" value="Sante medico-social"><span>Sant&#233; / m&#233;dico-social</span></label>
+          <label class="option"><input type="radio" name="q1_4" value="Arts design communication"><span>Arts / design / communication</span></label>
+          <label class="option"><input type="radio" name="q1_4" value="Autre" onchange="showOther('other_1_4',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_1_4"><input type="text" name="q1_4_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 1.5 -->
       <div class="question">
-        <div class="question-label">1.5 Quel Ã©tait le type principal de ton projet ?</div>
+        <div class="question-label">1.5 Quel &#233;tait le type principal de ton projet&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q1_5" value="Tech / numÃ©rique" required><span>Tech / numÃ©rique</span></label>
-          <label class="option"><input type="radio" name="q1_5" value="Social / solidaire"><span>Social / solidaire</span></label>
-          <label class="option"><input type="radio" name="q1_5" value="Local / territorial"><span>Local / territorial</span></label>
-          <label class="option"><input type="radio" name="q1_5" value="Culturel / crÃ©atif"><span>Culturel / crÃ©atif</span></label>
-          <label class="option"><input type="radio" name="q1_5" value="Commerce / service"><span>Commerce / service</span></label>
-          <label class="option">
-            <input type="radio" name="q1_5" value="Autre" onchange="toggleOther('other_1_5', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_1_5"><input type="text" name="q1_5_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q1_5" value="Tech numerique" required><span>Tech / num&#233;rique</span></label>
+          <label class="option"><input type="radio" name="q1_5" value="Social solidaire"><span>Social / solidaire</span></label>
+          <label class="option"><input type="radio" name="q1_5" value="Local territorial"><span>Local / territorial</span></label>
+          <label class="option"><input type="radio" name="q1_5" value="Culturel creatif"><span>Culturel / cr&#233;atif</span></label>
+          <label class="option"><input type="radio" name="q1_5" value="Commerce service"><span>Commerce / service</span></label>
+          <label class="option"><input type="radio" name="q1_5" value="Autre" onchange="showOther('other_1_5',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_1_5"><input type="text" name="q1_5_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 1.6 -->
       <div class="question">
-        <div class="question-label">1.6 Au moment du dispositif, ton projet en Ã©tait Ã  quel stade ?</div>
+        <div class="question-label">1.6 Au moment du dispositif, ton projet en &#233;tait &#224; quel stade&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q1_6" value="IdÃ©e gÃ©nÃ©rale" required><span>IdÃ©e assez gÃ©nÃ©rale</span></label>
-          <label class="option"><input type="radio" name="q1_6" value="IdÃ©e formalisÃ©e"><span>IdÃ©e dÃ©jÃ  formalisÃ©e (business model, dossier, etc.)</span></label>
-          <label class="option"><input type="radio" name="q1_6" value="Prototype / MVP"><span>Prototype / premier produit ou service testÃ©</span></label>
+          <label class="option"><input type="radio" name="q1_6" value="Idee generale" required><span>Id&#233;e assez g&#233;n&#233;rale</span></label>
+          <label class="option"><input type="radio" name="q1_6" value="Idee formalisee"><span>Id&#233;e d&#233;j&#224; formalis&#233;e (business model, dossier, etc.)</span></label>
+          <label class="option"><input type="radio" name="q1_6" value="Prototype MVP"><span>Prototype / premier produit ou service test&#233;</span></label>
           <label class="option"><input type="radio" name="q1_6" value="Premiers clients"><span>Premiers clients / premiers utilisateurs</span></label>
-          <label class="option"><input type="radio" name="q1_6" value="Entreprise dÃ©jÃ  crÃ©Ã©e"><span>Entreprise dÃ©jÃ  crÃ©Ã©e (statuts dÃ©posÃ©s)</span></label>
-          <label class="option">
-            <input type="radio" name="q1_6" value="Autre" onchange="toggleOther('other_1_6', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_1_6"><input type="text" name="q1_6_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q1_6" value="Entreprise creee"><span>Entreprise d&#233;j&#224; cr&#233;&#233;e (statuts d&#233;pos&#233;s)</span></label>
+          <label class="option"><input type="radio" name="q1_6" value="Autre" onchange="showOther('other_1_6',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_1_6"><input type="text" name="q1_6_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 1.7 OPTIONAL -->
       <div class="question">
-        <div class="question-label">1.7 Tranche d'Ã¢ge <span class="optional">(optionnel)</span></div>
+        <div class="question-label">1.7 Tranche d&#8217;&#226;ge <span class="optional">(optionnel)</span></div>
         <div class="options">
           <label class="option"><input type="radio" name="q1_7" value="Moins de 20 ans"><span>Moins de 20 ans</span></label>
-          <label class="option"><input type="radio" name="q1_7" value="20â€“23 ans"><span>20â€“23 ans</span></label>
-          <label class="option"><input type="radio" name="q1_7" value="24â€“27 ans"><span>24â€“27 ans</span></label>
+          <label class="option"><input type="radio" name="q1_7" value="20-23 ans"><span>20&#8211;23 ans</span></label>
+          <label class="option"><input type="radio" name="q1_7" value="24-27 ans"><span>24&#8211;27 ans</span></label>
           <label class="option"><input type="radio" name="q1_7" value="28 ans et plus"><span>28 ans et plus</span></label>
         </div>
       </div>
     </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         SECTION 2 â€“ EXPÃ‰RIENCE DU DISPOSITIF
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- SECTION 2 -->
     <div class="section">
-      <div class="section-title"><span class="section-num">2</span> ExpÃ©rience du dispositif</div>
-      <p class="section-note">Si tu as connu plusieurs dispositifs, rÃ©ponds en pensant Ã  celui qui t'a le plus marquÃ©.</p>
+      <div class="section-title"><span class="section-num">2</span> Exp&#233;rience du dispositif</div>
+      <p class="section-note">Si tu as connu plusieurs dispositifs, r&#233;ponds en pensant &#224; celui qui t&#8217;a le plus marqu&#233;.</p>
 
-      <!-- 2.1 -->
       <div class="question">
-        <div class="question-label">2.1 Ã€ quel dispositif pensais-tu en prioritÃ© ?</div>
+        <div class="question-label">2.1 &#192; quel dispositif pensais-tu en priorit&#233;&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q2_1" value="PÃ‰PITE" required><span>PÃ‰PITE</span></label>
+          <label class="option"><input type="radio" name="q2_1" value="PEPITE" required><span>P&#201;PITE</span></label>
           <label class="option"><input type="radio" name="q2_1" value="Incubateur universitaire"><span>Incubateur universitaire</span></label>
-          <label class="option"><input type="radio" name="q2_1" value="Incubateur privÃ©"><span>Incubateur privÃ©</span></label>
-          <label class="option"><input type="radio" name="q2_1" value="Concours / challenge entrepreneurial"><span>Concours / challenge entrepreneurial</span></label>
-          <label class="option"><input type="radio" name="q2_1" value="Programme d'accompagnement"><span>Programme d'accompagnement (formation, coaching, etc.)</span></label>
-          <label class="option">
-            <input type="radio" name="q2_1" value="Autre" onchange="toggleOther('other_2_1', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_2_1"><input type="text" name="q2_1_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q2_1" value="Incubateur prive"><span>Incubateur priv&#233;</span></label>
+          <label class="option"><input type="radio" name="q2_1" value="Concours challenge"><span>Concours / challenge entrepreneurial</span></label>
+          <label class="option"><input type="radio" name="q2_1" value="Programme accompagnement"><span>Programme d&#8217;accompagnement (formation, coaching, etc.)</span></label>
+          <label class="option"><input type="radio" name="q2_1" value="Autre" onchange="showOther('other_2_1',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_2_1"><input type="text" name="q2_1_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 2.2 -->
       <div class="question">
-        <div class="question-label">2.2 Quelle a Ã©tÃ© l'issue de ta participation (ou candidature) ?</div>
+        <div class="question-label">2.2 Quelle a &#233;t&#233; l&#8217;issue de ta participation (ou candidature)&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q2_2" value="SÃ©lectionnÃ©Â·e â€“ suivi jusqu'au bout" required><span>J'ai Ã©tÃ© sÃ©lectionnÃ©Â·e et j'ai suivi le dispositif jusqu'au bout</span></label>
-          <label class="option"><input type="radio" name="q2_2" value="SÃ©lectionnÃ©Â·e â€“ arrÃªt en cours"><span>J'ai Ã©tÃ© sÃ©lectionnÃ©Â·e mais j'ai arrÃªtÃ© en cours de route</span></label>
-          <label class="option"><input type="radio" name="q2_2" value="Candidature non retenue"><span>J'ai candidatÃ© mais je n'ai pas Ã©tÃ© retenuÂ·e</span></label>
-          <label class="option"><input type="radio" name="q2_2" value="Participation ponctuelle sans sÃ©lection"><span>J'ai participÃ© ponctuellement sans Ãªtre officiellement sÃ©lectionnÃ©Â·e</span></label>
-          <label class="option">
-            <input type="radio" name="q2_2" value="Autre" onchange="toggleOther('other_2_2', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_2_2"><input type="text" name="q2_2_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q2_2" value="Selectionne jusqu-au-bout" required><span>J&#8217;ai &#233;t&#233; s&#233;lectionn&#233;&#183;e et j&#8217;ai suivi le dispositif jusqu&#8217;au bout</span></label>
+          <label class="option"><input type="radio" name="q2_2" value="Selectionne arret en cours"><span>J&#8217;ai &#233;t&#233; s&#233;lectionn&#233;&#183;e mais j&#8217;ai arr&#234;t&#233; en cours de route</span></label>
+          <label class="option"><input type="radio" name="q2_2" value="Candidature non retenue"><span>J&#8217;ai candidat&#233; mais je n&#8217;ai pas &#233;t&#233; retenu&#183;e</span></label>
+          <label class="option"><input type="radio" name="q2_2" value="Participation ponctuelle"><span>J&#8217;ai particip&#233; ponctuellement sans &#234;tre officiellement s&#233;lectionn&#233;&#183;e</span></label>
+          <label class="option"><input type="radio" name="q2_2" value="Autre" onchange="showOther('other_2_2',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_2_2"><input type="text" name="q2_2_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 2.3 -->
       <div class="question">
-        <div class="question-label">2.3 Pendant combien de temps as-tu Ã©tÃ© impliquÃ©Â·e dans ce dispositif ?</div>
+        <div class="question-label">2.3 Pendant combien de temps as-tu &#233;t&#233; impliqu&#233;&#183;e dans ce dispositif&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q2_3" value="Moins d'un mois" required><span>Moins d'un mois</span></label>
-          <label class="option"><input type="radio" name="q2_3" value="1 Ã  3 mois"><span>1 Ã  3 mois</span></label>
-          <label class="option"><input type="radio" name="q2_3" value="3 Ã  6 mois"><span>3 Ã  6 mois</span></label>
+          <label class="option"><input type="radio" name="q2_3" value="Moins d-un mois" required><span>Moins d&#8217;un mois</span></label>
+          <label class="option"><input type="radio" name="q2_3" value="1 a 3 mois"><span>1 &#224; 3 mois</span></label>
+          <label class="option"><input type="radio" name="q2_3" value="3 a 6 mois"><span>3 &#224; 6 mois</span></label>
           <label class="option"><input type="radio" name="q2_3" value="Plus de 6 mois"><span>Plus de 6 mois</span></label>
         </div>
       </div>
 
-      <!-- 2.4 -->
       <div class="question">
-        <div class="question-label">2.4 Ã€ quelle frÃ©quence participais-tu aux activitÃ©s liÃ©es au dispositif ?</div>
+        <div class="question-label">2.4 &#192; quelle fr&#233;quence participais-tu aux activit&#233;s li&#233;es au dispositif&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q2_4" value="TrÃ¨s rÃ©guliÃ¨rement (â‰¥1 fois/semaine)" required><span>TrÃ¨s rÃ©guliÃ¨rement (au moins une fois par semaine)</span></label>
-          <label class="option"><input type="radio" name="q2_4" value="RÃ©guliÃ¨rement (1â€“2 fois/mois)"><span>RÃ©guliÃ¨rement (environ 1 Ã  2 fois par mois)</span></label>
+          <label class="option"><input type="radio" name="q2_4" value="Tres regulierement" required><span>Tr&#232;s r&#233;guli&#232;rement (au moins une fois par semaine)</span></label>
+          <label class="option"><input type="radio" name="q2_4" value="Regulierement"><span>R&#233;guli&#232;rement (environ 1 &#224; 2 fois par mois)</span></label>
           <label class="option"><input type="radio" name="q2_4" value="De temps en temps"><span>De temps en temps</span></label>
           <label class="option"><input type="radio" name="q2_4" value="Rarement"><span>Rarement</span></label>
         </div>
       </div>
 
-      <!-- 2.5 -->
       <div class="question">
-        <div class="question-label">2.5 Dans quelle mesure avais-tu le sentiment que ton projet correspondait aux attentes du dispositif ? <em>(1 = Pas du tout, 5 = Tout Ã  fait)</em></div>
-        <div class="options" style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q2_5" value="1" required><span>1<br><small>Pas du tout</small></span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q2_5" value="2"><span>2</span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q2_5" value="3"><span>3</span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q2_5" value="4"><span>4</span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q2_5" value="5"><span>5<br><small>Tout Ã  fait</small></span></label>
+        <div class="question-label">2.5 Dans quelle mesure avais-tu le sentiment que ton projet correspondait aux attentes du dispositif&#160;? <em>(1 = Pas du tout, 5 = Tout &#224; fait)</em></div>
+        <div class="options" style="flex-direction:row;flex-wrap:wrap;gap:10px;">
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q2_5" value="1" required><span>1<br><small>Pas du tout</small></span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q2_5" value="2"><span>2</span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q2_5" value="3"><span>3</span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q2_5" value="4"><span>4</span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q2_5" value="5"><span>5<br><small>Tout &#224; fait</small></span></label>
         </div>
       </div>
     </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         SECTION 3 â€“ NORMES PERÃ‡UES
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- SECTION 3 -->
     <div class="section">
-      <div class="section-title"><span class="section-num">3</span> Normes perÃ§ues</div>
-      <p class="section-note">Ces questions portent sur ce que tu percevais comme valorisÃ© ou attendu dans le dispositif.</p>
+      <div class="section-title"><span class="section-num">3</span> Normes per&#231;ues</div>
+      <p class="section-note">Ces questions portent sur ce que tu percevais comme valoris&#233; ou attendu dans le dispositif.</p>
 
-      <!-- 3.1 Likert matrix -->
       <div class="question">
-        <div class="question-label">3.1 Dans quelle mesure avais-tu le sentiment que le dispositif valorisait les dimensions suivantes ? <em>(1 = Pas du tout, 5 = TrÃ¨s fortement)</em></div>
+        <div class="question-label">3.1 Dans quelle mesure avais-tu le sentiment que le dispositif valorisait les dimensions suivantes&#160;? <em>(1 = Pas du tout, 5 = Tr&#232;s fortement)</em></div>
         <div style="overflow-x:auto;">
           <table class="likert-table">
             <thead>
-              <tr>
-                <th style="min-width:200px;"></th>
-                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
-              </tr>
-              <tr>
-                <th></th>
-                <th style="font-weight:400;color:#888;font-size:.75rem;">Pas du tout</th>
-                <th></th><th></th><th></th>
-                <th style="font-weight:400;color:#888;font-size:.75rem;">TrÃ¨s fort.</th>
-              </tr>
+              <tr><th style="min-width:200px;"></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+              <tr><th></th><th style="font-weight:400;color:#888;font-size:.75rem;">Pas du tout</th><th></th><th></th><th></th><th style="font-weight:400;color:#888;font-size:.75rem;">Tr&#232;s fort.</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Innovation (nouveautÃ©, rupture, technoâ€¦)</td>
-                <td><input type="radio" name="q3_1_innovation" value="1" required></td>
-                <td><input type="radio" name="q3_1_innovation" value="2"></td>
-                <td><input type="radio" name="q3_1_innovation" value="3"></td>
-                <td><input type="radio" name="q3_1_innovation" value="4"></td>
-                <td><input type="radio" name="q3_1_innovation" value="5"></td>
-              </tr>
-              <tr>
-                <td>RentabilitÃ© / potentiel Ã©conomique</td>
-                <td><input type="radio" name="q3_1_rentabilite" value="1" required></td>
-                <td><input type="radio" name="q3_1_rentabilite" value="2"></td>
-                <td><input type="radio" name="q3_1_rentabilite" value="3"></td>
-                <td><input type="radio" name="q3_1_rentabilite" value="4"></td>
-                <td><input type="radio" name="q3_1_rentabilite" value="5"></td>
-              </tr>
-              <tr>
-                <td>ScalabilitÃ© / potentiel de forte croissance</td>
-                <td><input type="radio" name="q3_1_scale" value="1" required></td>
-                <td><input type="radio" name="q3_1_scale" value="2"></td>
-                <td><input type="radio" name="q3_1_scale" value="3"></td>
-                <td><input type="radio" name="q3_1_scale" value="4"></td>
-                <td><input type="radio" name="q3_1_scale" value="5"></td>
-              </tr>
-              <tr>
-                <td>Impact social / environnemental</td>
-                <td><input type="radio" name="q3_1_impact" value="1" required></td>
-                <td><input type="radio" name="q3_1_impact" value="2"></td>
-                <td><input type="radio" name="q3_1_impact" value="3"></td>
-                <td><input type="radio" name="q3_1_impact" value="4"></td>
-                <td><input type="radio" name="q3_1_impact" value="5"></td>
-              </tr>
-              <tr>
-                <td>ClartÃ© et qualitÃ© du pitch</td>
-                <td><input type="radio" name="q3_1_pitch" value="1" required></td>
-                <td><input type="radio" name="q3_1_pitch" value="2"></td>
-                <td><input type="radio" name="q3_1_pitch" value="3"></td>
-                <td><input type="radio" name="q3_1_pitch" value="4"></td>
-                <td><input type="radio" name="q3_1_pitch" value="5"></td>
-              </tr>
-              <tr>
-                <td>FaisabilitÃ© rapide (aller vite vers le marchÃ©)</td>
-                <td><input type="radio" name="q3_1_faisabilite" value="1" required></td>
-                <td><input type="radio" name="q3_1_faisabilite" value="2"></td>
-                <td><input type="radio" name="q3_1_faisabilite" value="3"></td>
-                <td><input type="radio" name="q3_1_faisabilite" value="4"></td>
-                <td><input type="radio" name="q3_1_faisabilite" value="5"></td>
-              </tr>
-              <tr>
-                <td>Profil du porteur (parcours, personnalitÃ©, rÃ©seauâ€¦)</td>
-                <td><input type="radio" name="q3_1_profil" value="1" required></td>
-                <td><input type="radio" name="q3_1_profil" value="2"></td>
-                <td><input type="radio" name="q3_1_profil" value="3"></td>
-                <td><input type="radio" name="q3_1_profil" value="4"></td>
-                <td><input type="radio" name="q3_1_profil" value="5"></td>
-              </tr>
+              <tr><td>Innovation (nouveaut&#233;, rupture, techno&#8230;)</td><td><input type="radio" name="q3_1_innovation" value="1" required></td><td><input type="radio" name="q3_1_innovation" value="2"></td><td><input type="radio" name="q3_1_innovation" value="3"></td><td><input type="radio" name="q3_1_innovation" value="4"></td><td><input type="radio" name="q3_1_innovation" value="5"></td></tr>
+              <tr><td>Rentabilit&#233; / potentiel &#233;conomique</td><td><input type="radio" name="q3_1_rentabilite" value="1" required></td><td><input type="radio" name="q3_1_rentabilite" value="2"></td><td><input type="radio" name="q3_1_rentabilite" value="3"></td><td><input type="radio" name="q3_1_rentabilite" value="4"></td><td><input type="radio" name="q3_1_rentabilite" value="5"></td></tr>
+              <tr><td>Scalabilit&#233; / potentiel de forte croissance</td><td><input type="radio" name="q3_1_scale" value="1" required></td><td><input type="radio" name="q3_1_scale" value="2"></td><td><input type="radio" name="q3_1_scale" value="3"></td><td><input type="radio" name="q3_1_scale" value="4"></td><td><input type="radio" name="q3_1_scale" value="5"></td></tr>
+              <tr><td>Impact social / environnemental</td><td><input type="radio" name="q3_1_impact" value="1" required></td><td><input type="radio" name="q3_1_impact" value="2"></td><td><input type="radio" name="q3_1_impact" value="3"></td><td><input type="radio" name="q3_1_impact" value="4"></td><td><input type="radio" name="q3_1_impact" value="5"></td></tr>
+              <tr><td>Clart&#233; et qualit&#233; du pitch</td><td><input type="radio" name="q3_1_pitch" value="1" required></td><td><input type="radio" name="q3_1_pitch" value="2"></td><td><input type="radio" name="q3_1_pitch" value="3"></td><td><input type="radio" name="q3_1_pitch" value="4"></td><td><input type="radio" name="q3_1_pitch" value="5"></td></tr>
+              <tr><td>Faisabilit&#233; rapide (aller vite vers le march&#233;)</td><td><input type="radio" name="q3_1_faisabilite" value="1" required></td><td><input type="radio" name="q3_1_faisabilite" value="2"></td><td><input type="radio" name="q3_1_faisabilite" value="3"></td><td><input type="radio" name="q3_1_faisabilite" value="4"></td><td><input type="radio" name="q3_1_faisabilite" value="5"></td></tr>
+              <tr><td>Profil du porteur (parcours, personnalit&#233;, r&#233;seau&#8230;)</td><td><input type="radio" name="q3_1_profil" value="1" required></td><td><input type="radio" name="q3_1_profil" value="2"></td><td><input type="radio" name="q3_1_profil" value="3"></td><td><input type="radio" name="q3_1_profil" value="4"></td><td><input type="radio" name="q3_1_profil" value="5"></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- 3.2 -->
       <div class="question">
-        <div class="question-label">3.2 Selon toi, de qui venaient principalement ces attentes ?</div>
+        <div class="question-label">3.2 Selon toi, de qui venaient principalement ces attentes&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q3_2" value="Du jury (comitÃ© de sÃ©lection)" required><span>Du jury (comitÃ© de sÃ©lection)</span></label>
-          <label class="option"><input type="radio" name="q3_2" value="Des coachs / mentors"><span>Des coachs / mentors</span></label>
-          <label class="option"><input type="radio" name="q3_2" value="Des chargÃ©s de mission / responsables du dispositif"><span>Des chargÃ©s de mission / responsables du dispositif</span></label>
-          <label class="option"><input type="radio" name="q3_2" value="Des autres Ã©tudiants / porteurs de projet"><span>Des autres Ã©tudiantÂ·es / porteurs de projet</span></label>
-          <label class="option"><input type="radio" name="q3_2" value="Des documents officiels"><span>Des documents officiels (appel Ã  projets, grilles, etc.)</span></label>
-          <label class="option">
-            <input type="radio" name="q3_2" value="Autre" onchange="toggleOther('other_3_2', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_3_2"><input type="text" name="q3_2_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="radio" name="q3_2" value="Du jury" required><span>Du jury (comit&#233; de s&#233;lection)</span></label>
+          <label class="option"><input type="radio" name="q3_2" value="Des coachs mentors"><span>Des coachs / mentors</span></label>
+          <label class="option"><input type="radio" name="q3_2" value="Des charges de mission"><span>Des charg&#233;s de mission / responsables du dispositif</span></label>
+          <label class="option"><input type="radio" name="q3_2" value="Des autres etudiants"><span>Des autres &#233;tudiant&#183;es / porteurs de projet</span></label>
+          <label class="option"><input type="radio" name="q3_2" value="Des documents officiels"><span>Des documents officiels (appel &#224; projets, grilles, etc.)</span></label>
+          <label class="option"><input type="radio" name="q3_2" value="Autre" onchange="showOther('other_3_2',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_3_2"><input type="text" name="q3_2_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
 
-      <!-- 3.3 -->
       <div class="question">
-        <div class="question-label">3.3 As-tu eu le sentiment qu'il fallait adapter ton projet ou ta maniÃ¨re de le prÃ©senter pour Ãªtre mieux perÃ§uÂ·e ?</div>
+        <div class="question-label">3.3 As-tu eu le sentiment qu&#8217;il fallait adapter ton projet ou ta mani&#232;re de le pr&#233;senter pour &#234;tre mieux per&#231;u&#183;e&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q3_3" value="Oui, clairement" required><span>Oui, clairement</span></label>
-          <label class="option"><input type="radio" name="q3_3" value="Oui, un peu"><span>Oui, un peu</span></label>
+          <label class="option"><input type="radio" name="q3_3" value="Oui clairement" required><span>Oui, clairement</span></label>
+          <label class="option"><input type="radio" name="q3_3" value="Oui un peu"><span>Oui, un peu</span></label>
           <label class="option"><input type="radio" name="q3_3" value="Non"><span>Non</span></label>
           <label class="option"><input type="radio" name="q3_3" value="Je ne sais pas"><span>Je ne sais pas</span></label>
         </div>
       </div>
 
-      <!-- 3.4 Checkboxes -->
       <div class="question">
-        <div class="question-label">3.4 Si oui, qu'as-tu principalement adaptÃ© ? <span class="optional">(Plusieurs rÃ©ponses possibles)</span></div>
+        <div class="question-label">3.4 Si oui, qu&#8217;as-tu principalement adapt&#233;&#160;? <span class="optional">(Plusieurs r&#233;ponses possibles)</span></div>
         <div class="options">
-          <label class="option"><input type="checkbox" name="q3_4" value="Le discours (storytelling)"><span>Le discours (storytelling, narration de ton projet)</span></label>
-          <label class="option"><input type="checkbox" name="q3_4" value="Le format de prÃ©sentation"><span>Le format de prÃ©sentation (diapositives, pitch en 3 min, etc.)</span></label>
-          <label class="option"><input type="checkbox" name="q3_4" value="Les objectifs affichÃ©s du projet"><span>Les objectifs affichÃ©s du projet</span></label>
-          <label class="option"><input type="checkbox" name="q3_4" value="Le niveau d'ambition"><span>Le niveau d'ambition (taille du marchÃ©, croissance visÃ©e, etc.)</span></label>
-          <label class="option"><input type="checkbox" name="q3_4" value="Le vocabulaire employÃ©"><span>Le vocabulaire employÃ© (plus Â« business Â», plus Â« impact Â», etc.)</span></label>
-          <label class="option">
-            <input type="checkbox" name="q3_4" value="Autre" onchange="toggleOtherCheck('other_3_4', this)">
-            <span>Autre (prÃ©ciser)</span>
-          </label>
-          <div class="other-input" id="other_3_4"><input type="text" name="q3_4_autre" placeholder="PrÃ©cisezâ€¦"></div>
+          <label class="option"><input type="checkbox" name="q3_4" value="Le discours storytelling"><span>Le discours (storytelling, narration de ton projet)</span></label>
+          <label class="option"><input type="checkbox" name="q3_4" value="Le format de presentation"><span>Le format de pr&#233;sentation (diapositives, pitch en 3 min, etc.)</span></label>
+          <label class="option"><input type="checkbox" name="q3_4" value="Les objectifs affiches"><span>Les objectifs affich&#233;s du projet</span></label>
+          <label class="option"><input type="checkbox" name="q3_4" value="Le niveau d-ambition"><span>Le niveau d&#8217;ambition (taille du march&#233;, croissance vis&#233;e, etc.)</span></label>
+          <label class="option"><input type="checkbox" name="q3_4" value="Le vocabulaire employe"><span>Le vocabulaire employ&#233; (plus &#171;&#160;business&#160;&#187;, plus &#171;&#160;impact&#160;&#187;, etc.)</span></label>
+          <label class="option"><input type="checkbox" name="q3_4" value="Autre" onchange="toggleOtherCheck('other_3_4',this)"><span>Autre (pr&#233;ciser)</span></label>
+          <div class="other-input" id="other_3_4"><input type="text" name="q3_4_autre" placeholder="Pr&#233;cisez&#8230;"></div>
         </div>
       </div>
     </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         SECTION 4 â€“ AJUSTEMENTS ET TENSIONS
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- SECTION 4 -->
     <div class="section">
       <div class="section-title"><span class="section-num">4</span> Ajustements et tensions</div>
       <p class="section-note">Ces questions portent sur tes comportements concrets et ton rapport au dispositif.</p>
 
-      <!-- 4.1 Frequency matrix -->
       <div class="question">
-        <div class="question-label">4.1 T'est-il arrivÃ© deâ€¦ ?</div>
+        <div class="question-label">4.1 T&#8217;est-il arriv&#233; de&#8230;&#160;?</div>
         <div style="overflow-x:auto;">
           <table class="freq-table">
             <thead>
-              <tr>
-                <th style="min-width:220px;"></th>
-                <th>Jamais</th>
-                <th>Rarement</th>
-                <th>Parfois</th>
-                <th>Souvent</th>
-              </tr>
+              <tr><th style="min-width:220px;"></th><th>Jamais</th><th>Rarement</th><th>Parfois</th><th>Souvent</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Simplifier ton projet pour qu'il Â« passe mieux Â»</td>
-                <td><input type="radio" name="q4_1a" value="Jamais" required></td>
-                <td><input type="radio" name="q4_1a" value="Rarement"></td>
-                <td><input type="radio" name="q4_1a" value="Parfois"></td>
-                <td><input type="radio" name="q4_1a" value="Souvent"></td>
-              </tr>
-              <tr>
-                <td>Insister sur certains aspects pour coller aux attentes perÃ§ues</td>
-                <td><input type="radio" name="q4_1b" value="Jamais" required></td>
-                <td><input type="radio" name="q4_1b" value="Rarement"></td>
-                <td><input type="radio" name="q4_1b" value="Parfois"></td>
-                <td><input type="radio" name="q4_1b" value="Souvent"></td>
-              </tr>
-              <tr>
-                <td>Modifier ton pitch selon l'interlocuteur</td>
-                <td><input type="radio" name="q4_1c" value="Jamais" required></td>
-                <td><input type="radio" name="q4_1c" value="Rarement"></td>
-                <td><input type="radio" name="q4_1c" value="Parfois"></td>
-                <td><input type="radio" name="q4_1c" value="Souvent"></td>
-              </tr>
-              <tr>
-                <td>Faire semblant d'adhÃ©rer Ã  certaines attentes ou recommandations</td>
-                <td><input type="radio" name="q4_1d" value="Jamais" required></td>
-                <td><input type="radio" name="q4_1d" value="Rarement"></td>
-                <td><input type="radio" name="q4_1d" value="Parfois"></td>
-                <td><input type="radio" name="q4_1d" value="Souvent"></td>
-              </tr>
-              <tr>
-                <td>Refuser d'adapter ton projet malgrÃ© les conseils</td>
-                <td><input type="radio" name="q4_1e" value="Jamais" required></td>
-                <td><input type="radio" name="q4_1e" value="Rarement"></td>
-                <td><input type="radio" name="q4_1e" value="Parfois"></td>
-                <td><input type="radio" name="q4_1e" value="Souvent"></td>
-              </tr>
+              <tr><td>Simplifier ton projet pour qu&#8217;il &#171;&#160;passe mieux&#160;&#187;</td><td><input type="radio" name="q4_1a" value="Jamais" required></td><td><input type="radio" name="q4_1a" value="Rarement"></td><td><input type="radio" name="q4_1a" value="Parfois"></td><td><input type="radio" name="q4_1a" value="Souvent"></td></tr>
+              <tr><td>Insister sur certains aspects pour coller aux attentes per&#231;ues</td><td><input type="radio" name="q4_1b" value="Jamais" required></td><td><input type="radio" name="q4_1b" value="Rarement"></td><td><input type="radio" name="q4_1b" value="Parfois"></td><td><input type="radio" name="q4_1b" value="Souvent"></td></tr>
+              <tr><td>Modifier ton pitch selon l&#8217;interlocuteur</td><td><input type="radio" name="q4_1c" value="Jamais" required></td><td><input type="radio" name="q4_1c" value="Rarement"></td><td><input type="radio" name="q4_1c" value="Parfois"></td><td><input type="radio" name="q4_1c" value="Souvent"></td></tr>
+              <tr><td>Faire semblant d&#8217;adh&#233;rer &#224; certaines attentes ou recommandations</td><td><input type="radio" name="q4_1d" value="Jamais" required></td><td><input type="radio" name="q4_1d" value="Rarement"></td><td><input type="radio" name="q4_1d" value="Parfois"></td><td><input type="radio" name="q4_1d" value="Souvent"></td></tr>
+              <tr><td>Refuser d&#8217;adapter ton projet malgr&#233; les conseils</td><td><input type="radio" name="q4_1e" value="Jamais" required></td><td><input type="radio" name="q4_1e" value="Rarement"></td><td><input type="radio" name="q4_1e" value="Parfois"></td><td><input type="radio" name="q4_1e" value="Souvent"></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- 4.2 -->
       <div class="question">
-        <div class="question-label">4.2 Globalement, comment dÃ©crirais-tu ta relation Ã  ce dispositif ?</div>
+        <div class="question-label">4.2 Globalement, comment d&#233;crirais-tu ta relation &#224; ce dispositif&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q4_2" value="TrÃ¨s conforme" required><span>TrÃ¨s conforme (j'adhÃ©rais pleinement aux attentes)</span></label>
-          <label class="option"><input type="radio" name="q4_2" value="Assez conforme"><span>Assez conforme (je me retrouvais plutÃ´t dans les attentes)</span></label>
-          <label class="option"><input type="radio" name="q4_2" value="Adaptation stratÃ©gique"><span>Adaptation stratÃ©gique (je me suis surtout adaptÃ©Â·e pour en tirer des bÃ©nÃ©fices)</span></label>
-          <label class="option"><input type="radio" name="q4_2" value="Tension rÃ©guliÃ¨re"><span>Tension rÃ©guliÃ¨re (je ressentais souvent un dÃ©calage ou une pression)</span></label>
-          <label class="option"><input type="radio" name="q4_2" value="DÃ©calage / rÃ©sistance"><span>DÃ©calage / rÃ©sistance (je me sentais en dÃ©saccord sur plusieurs points)</span></label>
-          <label class="option"><input type="radio" name="q4_2" value="Rejet"><span>Rejet (je me suis progressivement dÃ©sengagÃ©Â·e du dispositif)</span></label>
+          <label class="option"><input type="radio" name="q4_2" value="Tres conforme" required><span>Tr&#232;s conforme (j&#8217;adh&#233;rais pleinement aux attentes)</span></label>
+          <label class="option"><input type="radio" name="q4_2" value="Assez conforme"><span>Assez conforme (je me retrouvais plut&#244;t dans les attentes)</span></label>
+          <label class="option"><input type="radio" name="q4_2" value="Adaptation strategique"><span>Adaptation strat&#233;gique (je me suis surtout adapt&#233;&#183;e pour en tirer des b&#233;n&#233;fices)</span></label>
+          <label class="option"><input type="radio" name="q4_2" value="Tension reguliere"><span>Tension r&#233;guli&#232;re (je ressentais souvent un d&#233;calage ou une pression)</span></label>
+          <label class="option"><input type="radio" name="q4_2" value="Decalage resistance"><span>D&#233;calage / r&#233;sistance (je me sentais en d&#233;saccord sur plusieurs points)</span></label>
+          <label class="option"><input type="radio" name="q4_2" value="Rejet"><span>Rejet (je me suis progressivement d&#233;sengag&#233;&#183;e du dispositif)</span></label>
         </div>
       </div>
 
-      <!-- 4.3 -->
       <div class="question">
-        <div class="question-label">4.3 Quand tu t'es adaptÃ©Â·e au dispositif, comment te sentais-tu le plus souvent ?</div>
+        <div class="question-label">4.3 Quand tu t&#8217;es adapt&#233;&#183;e au dispositif, comment te sentais-tu le plus souvent&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q4_3" value="PlutÃ´t Ã  l'aise" required><span>PlutÃ´t Ã  l'aise, c'Ã©tait logique pour moi</span></label>
-          <label class="option"><input type="radio" name="q4_3" value="PartagÃ©Â·e"><span>PartagÃ©Â·e, prÃªtÂ·e Ã  Â« jouer le jeu Â» sans Ãªtre totalement convaincuÂ·e</span></label>
-          <label class="option"><input type="radio" name="q4_3" value="En dÃ©calage"><span>En dÃ©calage, avec l'impression de devoir me travestir un peu</span></label>
+          <label class="option"><input type="radio" name="q4_3" value="Plutot a l-aise" required><span>Plut&#244;t &#224; l&#8217;aise, c&#8217;&#233;tait logique pour moi</span></label>
+          <label class="option"><input type="radio" name="q4_3" value="Partage"><span>Partag&#233;&#183;e, pr&#234;t&#183;e &#224; &#171;&#160;jouer le jeu&#160;&#187; sans &#234;tre totalement convaincu&#183;e</span></label>
+          <label class="option"><input type="radio" name="q4_3" value="En decalage"><span>En d&#233;calage, avec l&#8217;impression de devoir me travestir un peu</span></label>
           <label class="option"><input type="radio" name="q4_3" value="Sous pression"><span>Sous pression, avec un sentiment de contrainte</span></label>
         </div>
       </div>
 
-      <!-- 4.4 Open -->
       <div class="question">
-        <div class="question-label">4.4 Peux-tu donner un exemple concret d'une situation oÃ¹ tu as dÃ» t'adapter au dispositif ou Ã  ses attentes ?</div>
-        <textarea name="q4_4" rows="4" placeholder="DÃ©cris une situation concrÃ¨te (format du pitch, critÃ¨res du jury, conseils des accompagnantsâ€¦)"></textarea>
+        <div class="question-label">4.4 Peux-tu donner un exemple concret d&#8217;une situation o&#249; tu as d&#251; t&#8217;adapter au dispositif ou &#224; ses attentes&#160;?</div>
+        <textarea name="q4_4" rows="4" placeholder="D&#233;cris une situation concr&#232;te (format du pitch, crit&#232;res du jury, conseils des accompagnants&#8230;)"></textarea>
       </div>
     </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         SECTION 5 â€“ EFFETS DE L'EXPÃ‰RIENCE
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- SECTION 5 -->
     <div class="section">
-      <div class="section-title"><span class="section-num">5</span> Effets de l'expÃ©rience</div>
-      <p class="section-note">Ces questions portent sur ce que cette expÃ©rience a changÃ© pour toi et ton projet.</p>
+      <div class="section-title"><span class="section-num">5</span> Effets de l&#8217;exp&#233;rience</div>
+      <p class="section-note">Ces questions portent sur ce que cette exp&#233;rience a chang&#233; pour toi et ton projet.</p>
 
-      <!-- 5.1 -->
       <div class="question">
-        <div class="question-label">5.1 Ã€ la suite de cette expÃ©rience, ton projet a-t-il changÃ© ?</div>
+        <div class="question-label">5.1 &#192; la suite de cette exp&#233;rience, ton projet a-t-il chang&#233;&#160;?</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q5_1" value="Oui, fortement" required><span>Oui, fortement (changement important d'orientation, de cible, de modÃ¨le, etc.)</span></label>
-          <label class="option"><input type="radio" name="q5_1" value="Oui, un peu"><span>Oui, un peu (ajustements, prÃ©cisions, mais mÃªme logique globale)</span></label>
-          <label class="option"><input type="radio" name="q5_1" value="Non"><span>Non, le projet est restÃ© globalement le mÃªme</span></label>
-          <label class="option"><input type="radio" name="q5_1" value="Je ne sais pas"><span>Je ne sais pas / difficile Ã  dire</span></label>
+          <label class="option"><input type="radio" name="q5_1" value="Oui fortement" required><span>Oui, fortement (changement important d&#8217;orientation, de cible, de mod&#232;le, etc.)</span></label>
+          <label class="option"><input type="radio" name="q5_1" value="Oui un peu"><span>Oui, un peu (ajustements, pr&#233;cisions, mais m&#234;me logique globale)</span></label>
+          <label class="option"><input type="radio" name="q5_1" value="Non"><span>Non, le projet est rest&#233; globalement le m&#234;me</span></label>
+          <label class="option"><input type="radio" name="q5_1" value="Je ne sais pas"><span>Je ne sais pas / difficile &#224; dire</span></label>
         </div>
       </div>
 
-      <!-- 5.2 -->
       <div class="question">
-        <div class="question-label">5.2 AprÃ¨s cette expÃ©rience, as-tu plutÃ´t eu envieâ€¦</div>
+        <div class="question-label">5.2 Apr&#232;s cette exp&#233;rience, as-tu plut&#244;t eu envie&#8230;</div>
         <div class="options">
-          <label class="option"><input type="radio" name="q5_2" value="Continuer et renforcer le projet" required><span>De continuer et de renforcer ce projet tel qu'il Ã©tait</span></label>
-          <label class="option"><input type="radio" name="q5_2" value="Poursuivre en le transformant"><span>De le poursuivre mais en le transformant</span></label>
+          <label class="option"><input type="radio" name="q5_2" value="Continuer et renforcer" required><span>De continuer et de renforcer ce projet tel qu&#8217;il &#233;tait</span></label>
+          <label class="option"><input type="radio" name="q5_2" value="Poursuivre en transformant"><span>De le poursuivre mais en le transformant</span></label>
           <label class="option"><input type="radio" name="q5_2" value="Mettre en pause"><span>De le mettre en pause</span></label>
-          <label class="option"><input type="radio" name="q5_2" value="Abandonner mais relancer plus tard"><span>De l'abandonner mais avec l'idÃ©e de lancer un autre projet plus tard</span></label>
-          <label class="option"><input type="radio" name="q5_2" value="ArrÃªter l'entrepreneuriat"><span>D'arrÃªter pour le moment l'entrepreneuriat</span></label>
+          <label class="option"><input type="radio" name="q5_2" value="Abandonner relancer plus tard"><span>De l&#8217;abandonner mais avec l&#8217;id&#233;e de lancer un autre projet plus tard</span></label>
+          <label class="option"><input type="radio" name="q5_2" value="Arreter entrepreneuriat"><span>D&#8217;arr&#234;ter pour le moment l&#8217;entrepreneuriat</span></label>
         </div>
       </div>
 
-      <!-- 5.3 -->
       <div class="question">
-        <div class="question-label">5.3 Cette expÃ©rience a-t-elle changÃ© ta maniÃ¨re de te prÃ©senter comme entrepreneurÂ·e / porteurÂ·se de projet ?</div>
+        <div class="question-label">5.3 Cette exp&#233;rience a-t-elle chang&#233; ta mani&#232;re de te pr&#233;senter comme entrepreneur&#183;e / porteur&#183;se de projet&#160;?</div>
         <div class="options">
           <label class="option"><input type="radio" name="q5_3" value="Oui" required><span>Oui</span></label>
           <label class="option"><input type="radio" name="q5_3" value="Non"><span>Non</span></label>
@@ -756,9 +557,8 @@
         </div>
       </div>
 
-      <!-- 5.4 -->
       <div class="question">
-        <div class="question-label">5.4 As-tu eu le sentiment que le dispositif t'a aidÃ© Ã  clarifier ton projet, mais aussi Ã  le <em>formater</em> d'une certaine maniÃ¨re ?</div>
+        <div class="question-label">5.4 As-tu eu le sentiment que le dispositif t&#8217;a aid&#233; &#224; clarifier ton projet, mais aussi &#224; le <em>formater</em> d&#8217;une certaine mani&#232;re&#160;?</div>
         <div class="options">
           <label class="option"><input type="radio" name="q5_4" value="Oui" required><span>Oui</span></label>
           <label class="option"><input type="radio" name="q5_4" value="Non"><span>Non</span></label>
@@ -766,67 +566,58 @@
         </div>
       </div>
 
-      <!-- 5.5 Open -->
       <div class="question">
-        <div class="question-label">5.5 Qu'est-ce que tu as compris, aprÃ¨s coup, qu'on attendait vraiment de toi dans ce dispositif ?</div>
-        <textarea name="q5_5" rows="4" placeholder="En termes de type de projet, de posture, de faÃ§on de te prÃ©senterâ€¦"></textarea>
+        <div class="question-label">5.5 Qu&#8217;est-ce que tu as compris, apr&#232;s coup, qu&#8217;on attendait vraiment de toi dans ce dispositif&#160;?</div>
+        <textarea name="q5_5" rows="4" placeholder="En termes de type de projet, de posture, de fa&#231;on de te pr&#233;senter&#8230;"></textarea>
       </div>
 
-      <!-- 5.6 -->
       <div class="question">
-        <div class="question-label">5.6 De maniÃ¨re gÃ©nÃ©rale, comment Ã©values-tu l'utilitÃ© de ce dispositif pour toi ? <em>(1 = Pas du tout utile, 5 = TrÃ¨s utile)</em></div>
-        <div class="options" style="flex-direction: row; flex-wrap: wrap; gap: 10px;">
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q5_6" value="1" required><span>1<br><small>Pas utile</small></span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q5_6" value="2"><span>2</span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q5_6" value="3"><span>3</span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q5_6" value="4"><span>4</span></label>
-          <label class="option" style="flex:1; min-width:70px; justify-content:center; text-align:center;"><input type="radio" name="q5_6" value="5"><span>5<br><small>TrÃ¨s utile</small></span></label>
+        <div class="question-label">5.6 De mani&#232;re g&#233;n&#233;rale, comment &#233;values-tu l&#8217;utilit&#233; de ce dispositif pour toi&#160;? <em>(1 = Pas du tout utile, 5 = Tr&#232;s utile)</em></div>
+        <div class="options" style="flex-direction:row;flex-wrap:wrap;gap:10px;">
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q5_6" value="1" required><span>1<br><small>Pas utile</small></span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q5_6" value="2"><span>2</span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q5_6" value="3"><span>3</span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q5_6" value="4"><span>4</span></label>
+          <label class="option" style="flex:1;min-width:70px;justify-content:center;text-align:center;"><input type="radio" name="q5_6" value="5"><span>5<br><small>Tr&#232;s utile</small></span></label>
         </div>
       </div>
 
-      <!-- 5.7 Open -->
       <div class="question">
-        <div class="question-label">5.7 Si tu devais rÃ©sumer ce dispositif en un mot ou une courte phrase (de ton point de vue), que dirais-tu ?</div>
-        <textarea name="q5_7" rows="2" placeholder="Un mot, une phraseâ€¦"></textarea>
+        <div class="question-label">5.7 Si tu devais r&#233;sumer ce dispositif en un mot ou une courte phrase, que dirais-tu&#160;?</div>
+        <textarea name="q5_7" rows="2" placeholder="Un mot, une phrase&#8230;"></textarea>
       </div>
     </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-         SECTION 6 â€“ SUITE DE LA RECHERCHE
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- SECTION 6 -->
     <div class="section" style="border-top-color:#27ae60;">
       <div class="section-title" style="color:#27ae60;"><span class="section-num" style="background:#27ae60;">6</span> Suite de la recherche</div>
-      <p class="section-note">Si tu souhaites participer Ã  un entretien approfondi.</p>
+      <p class="section-note">Si tu souhaites participer &#224; un entretien approfondi.</p>
 
-      <!-- 6.1 -->
       <div class="question">
-        <div class="question-label">6.1 Es-tu d'accord pour un entretien d'environ 45 Ã  60 minutes (en visio ou en prÃ©sentiel) pour discuter plus en dÃ©tail de ton expÃ©rience ?</div>
+        <div class="question-label">6.1 Es-tu d&#8217;accord pour un entretien d&#8217;environ 45 &#224; 60 minutes (en visio ou en pr&#233;sentiel)&#160;?</div>
         <div class="options">
           <label class="option"><input type="radio" name="q6_1" value="Oui" required onchange="toggleContact(this)"><span>Oui</span></label>
           <label class="option"><input type="radio" name="q6_1" value="Non" onchange="toggleContact(this)"><span>Non</span></label>
         </div>
       </div>
 
-      <!-- 6.2 Contact (shown only if "Oui") -->
       <div class="question" id="contact-block" style="display:none;">
-        <div class="question-label">6.2 Laisse une adresse e-mail ou un profil LinkedIn oÃ¹ je peux te contacter.</div>
-        <textarea name="q6_2" rows="2" placeholder="ex. prenom.nom@email.fr  /  linkedin.com/in/profil" id="contact_field"></textarea>
+        <div class="question-label">6.2 Laisse une adresse e-mail ou un profil LinkedIn o&#249; je peux te contacter.</div>
+        <textarea name="q6_2" rows="2" placeholder="ex. prenom.nom@email.fr  /  linkedin.com/in/profil"></textarea>
       </div>
     </div>
 
-    <!-- Submit -->
     <div class="submit-area">
-      <button type="submit" class="btn-submit" id="submitBtn">Envoyer mes rÃ©ponses â†’</button>
-      <div id="error-msg">Une erreur est survenue. VÃ©rifie ta connexion et rÃ©essaie.</div>
+      <button type="submit" class="btn-submit" id="submitBtn">Envoyer mes r&#233;ponses &#8594;</button>
+      <div id="error-msg">Une erreur est survenue. V&#233;rifie ta connexion et r&#233;essaie.</div>
     </div>
 
   </form>
 
-  <!-- Success -->
   <div id="success-msg">
-    <h2>Merci beaucoup ! ðŸŽ‰</h2>
-    <p>Tes rÃ©ponses ont bien Ã©tÃ© enregistrÃ©es.<br>
-    Si tu as acceptÃ© un entretien, je te contacterai prochainement.</p>
+    <h2>Merci beaucoup !</h2>
+    <p>Tes r&#233;ponses ont bien &#233;t&#233; enregistr&#233;es.<br>
+    Si tu as accept&#233; un entretien, je te contacterai prochainement.</p>
   </div>
 
 </div>
@@ -834,174 +625,112 @@
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVB7RAr3QiKMXY_YoI8Vt26fUgOBQxB9b1JEyOowMGisaX-nsNZYe2qC9-FxjW4hUT/exec";
 
-  // Toggle "Autre" text field for radio buttons
-  function toggleOther(id, radio) {
-    const el = document.getElementById(id);
-    if (radio.checked) {
-      el.classList.add("visible");
-    }
+  function showOther(id, radio) {
+    const group = radio.closest(".options");
+    const otherDiv = group ? group.querySelector(".other-input") : null;
+    if (otherDiv) otherDiv.classList.remove("visible");
+    if (radio.value === "Autre") document.getElementById(id).classList.add("visible");
   }
 
-  // Re-hide "Autre" fields when another radio in the group is chosen
-  document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.addEventListener("change", function () {
-      const name = this.name;
-      const otherId = "other_" + name.replace("q", "").replace(/_/g, "_");
-      // find siblings
-      const siblings = document.querySelectorAll(`input[name="${name}"]`);
-      siblings.forEach(r => {
-        if (r.value !== "Autre" && r.checked) {
-          // find the other-input for this group
-          const group = r.closest(".options");
-          if (group) {
-            const otherDiv = group.querySelector(".other-input");
-            if (otherDiv) otherDiv.classList.remove("visible");
-          }
-        }
-      });
-      if (this.value === "Autre") {
+  document.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener("change", function() {
+      if (this.value !== "Autre") {
         const group = this.closest(".options");
-        if (group) {
-          const otherDiv = group.querySelector(".other-input");
-          if (otherDiv) otherDiv.classList.add("visible");
-        }
+        if (group) { const d = group.querySelector(".other-input"); if (d) d.classList.remove("visible"); }
+      } else {
+        const group = this.closest(".options");
+        if (group) { const d = group.querySelector(".other-input"); if (d) d.classList.add("visible"); }
       }
     });
   });
 
-  // Toggle "Autre" for checkboxes
   function toggleOtherCheck(id, cb) {
     const el = document.getElementById(id);
-    if (cb.checked) { el.classList.add("visible"); }
-    else { el.classList.remove("visible"); }
+    if (el) el.classList[cb.checked ? "add" : "remove"]("visible");
   }
 
-  // Toggle contact field
   function toggleContact(radio) {
-    const block = document.getElementById("contact-block");
-    block.style.display = (radio.value === "Oui") ? "block" : "none";
+    document.getElementById("contact-block").style.display = radio.value === "Oui" ? "block" : "none";
   }
 
-  // Progress bar
-  function updateProgress() {
-    const requiredRadios = [
-      "q1_1","q1_2","q1_3","q1_4","q1_5","q1_6",
-      "q2_1","q2_2","q2_3","q2_4","q2_5",
-      "q3_1_innovation","q3_1_rentabilite","q3_1_scale","q3_1_impact","q3_1_pitch","q3_1_faisabilite","q3_1_profil",
-      "q3_2","q3_3",
-      "q4_1a","q4_1b","q4_1c","q4_1d","q4_1e","q4_2","q4_3",
-      "q5_1","q5_2","q5_3","q5_4","q5_6",
-      "q6_1"
-    ];
-    const answered = requiredRadios.filter(n => document.querySelector(`input[name="${n}"]:checked`)).length;
-    const pct = Math.round((answered / requiredRadios.length) * 100);
-    document.getElementById("progressBar").style.width = pct + "%";
-  }
-  document.addEventListener("change", updateProgress);
+  const REQUIRED = [
+    "q1_1","q1_2","q1_3","q1_4","q1_5","q1_6",
+    "q2_1","q2_2","q2_3","q2_4","q2_5",
+    "q3_1_innovation","q3_1_rentabilite","q3_1_scale","q3_1_impact","q3_1_pitch","q3_1_faisabilite","q3_1_profil",
+    "q3_2","q3_3",
+    "q4_1a","q4_1b","q4_1c","q4_1d","q4_1e","q4_2","q4_3",
+    "q5_1","q5_2","q5_3","q5_4","q5_6","q6_1"
+  ];
 
-  // Collect checkboxes
+  document.addEventListener("change", function() {
+    const answered = REQUIRED.filter(n => document.querySelector(`input[name="${n}"]:checked`)).length;
+    document.getElementById("progressBar").style.width = Math.round(answered / REQUIRED.length * 100) + "%";
+  });
+
   function getChecked(name) {
-    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value).join(", ");
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(e => e.value).join(", ");
   }
 
-  // Form submission
   document.getElementById("mainForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-
     const btn = document.getElementById("submitBtn");
-    const errMsg = document.getElementById("error-msg");
-    errMsg.style.display = "none";
+    const err = document.getElementById("error-msg");
+    err.style.display = "none";
 
-    // Basic validation for required radio groups
-    const requiredGroups = [
-      "q1_1","q1_2","q1_3","q1_4","q1_5","q1_6",
-      "q2_1","q2_2","q2_3","q2_4","q2_5",
-      "q3_1_innovation","q3_1_rentabilite","q3_1_scale","q3_1_impact","q3_1_pitch","q3_1_faisabilite","q3_1_profil",
-      "q3_2","q3_3",
-      "q4_1a","q4_1b","q4_1c","q4_1d","q4_1e","q4_2","q4_3",
-      "q5_1","q5_2","q5_3","q5_4","q5_6",
-      "q6_1"
-    ];
-    for (const name of requiredGroups) {
+    for (const name of REQUIRED) {
       if (!document.querySelector(`input[name="${name}"]:checked`)) {
-        errMsg.textContent = "Merci de rÃ©pondre Ã  toutes les questions obligatoires avant d'envoyer.";
-        errMsg.style.display = "block";
-        errMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+        err.textContent = "Merci de répondre à toutes les questions obligatoires avant d’envoyer.";
+        err.style.display = "block";
+        err.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
     }
 
     btn.disabled = true;
-    btn.textContent = "Envoi en coursâ€¦";
+    btn.textContent = "Envoi en cours…";
 
-    const val = n => {
-      const el = document.querySelector(`input[name="${n}"]:checked`);
-      return el ? el.value : "";
-    };
-    const txt = n => {
-      const el = document.querySelector(`[name="${n}"]`);
-      return el ? el.value.trim() : "";
-    };
+    const val = n => { const el = document.querySelector(`input[name="${n}"]:checked`); return el ? el.value : ""; };
+    const txt = n => { const el = document.querySelector(`[name="${n}"]`); return el ? el.value.trim() : ""; };
 
     const data = {
       timestamp: new Date().toLocaleString("fr-FR"),
-      q1_1: val("q1_1") === "Autre" ? "Autre: " + txt("q1_1_autre") : val("q1_1"),
-      q1_2: val("q1_2") === "Autre" ? "Autre: " + txt("q1_2_autre") : val("q1_2"),
-      q1_3: val("q1_3") === "Autre" ? "Autre: " + txt("q1_3_autre") : val("q1_3"),
-      q1_4: val("q1_4") === "Autre" ? "Autre: " + txt("q1_4_autre") : val("q1_4"),
-      q1_5: val("q1_5") === "Autre" ? "Autre: " + txt("q1_5_autre") : val("q1_5"),
-      q1_6: val("q1_6") === "Autre" ? "Autre: " + txt("q1_6_autre") : val("q1_6"),
+      q1_1: val("q1_1") === "Autre" ? "Autre: "+txt("q1_1_autre") : val("q1_1"),
+      q1_2: val("q1_2") === "Autre" ? "Autre: "+txt("q1_2_autre") : val("q1_2"),
+      q1_3: val("q1_3") === "Autre" ? "Autre: "+txt("q1_3_autre") : val("q1_3"),
+      q1_4: val("q1_4") === "Autre" ? "Autre: "+txt("q1_4_autre") : val("q1_4"),
+      q1_5: val("q1_5") === "Autre" ? "Autre: "+txt("q1_5_autre") : val("q1_5"),
+      q1_6: val("q1_6") === "Autre" ? "Autre: "+txt("q1_6_autre") : val("q1_6"),
       q1_7: val("q1_7"),
-      q2_1: val("q2_1") === "Autre" ? "Autre: " + txt("q2_1_autre") : val("q2_1"),
-      q2_2: val("q2_2") === "Autre" ? "Autre: " + txt("q2_2_autre") : val("q2_2"),
-      q2_3: val("q2_3"),
-      q2_4: val("q2_4"),
-      q2_5: val("q2_5"),
-      q3_1_innovation: val("q3_1_innovation"),
-      q3_1_rentabilite: val("q3_1_rentabilite"),
-      q3_1_scale: val("q3_1_scale"),
-      q3_1_impact: val("q3_1_impact"),
-      q3_1_pitch: val("q3_1_pitch"),
-      q3_1_faisabilite: val("q3_1_faisabilite"),
+      q2_1: val("q2_1") === "Autre" ? "Autre: "+txt("q2_1_autre") : val("q2_1"),
+      q2_2: val("q2_2") === "Autre" ? "Autre: "+txt("q2_2_autre") : val("q2_2"),
+      q2_3: val("q2_3"), q2_4: val("q2_4"), q2_5: val("q2_5"),
+      q3_1_innovation: val("q3_1_innovation"), q3_1_rentabilite: val("q3_1_rentabilite"),
+      q3_1_scale: val("q3_1_scale"), q3_1_impact: val("q3_1_impact"),
+      q3_1_pitch: val("q3_1_pitch"), q3_1_faisabilite: val("q3_1_faisabilite"),
       q3_1_profil: val("q3_1_profil"),
-      q3_2: val("q3_2") === "Autre" ? "Autre: " + txt("q3_2_autre") : val("q3_2"),
+      q3_2: val("q3_2") === "Autre" ? "Autre: "+txt("q3_2_autre") : val("q3_2"),
       q3_3: val("q3_3"),
-      q3_4: getChecked("q3_4") + (txt("q3_4_autre") ? " | Autre: " + txt("q3_4_autre") : ""),
-      q4_1a: val("q4_1a"),
-      q4_1b: val("q4_1b"),
-      q4_1c: val("q4_1c"),
-      q4_1d: val("q4_1d"),
-      q4_1e: val("q4_1e"),
-      q4_2: val("q4_2"),
-      q4_3: val("q4_3"),
-      q4_4: txt("q4_4"),
-      q5_1: val("q5_1"),
-      q5_2: val("q5_2"),
-      q5_3: val("q5_3"),
-      q5_4: val("q5_4"),
-      q5_5: txt("q5_5"),
-      q5_6: val("q5_6"),
-      q5_7: txt("q5_7"),
-      q6_1: val("q6_1"),
-      q6_2: txt("q6_2"),
+      q3_4: getChecked("q3_4") + (txt("q3_4_autre") ? " | Autre: "+txt("q3_4_autre") : ""),
+      q4_1a: val("q4_1a"), q4_1b: val("q4_1b"), q4_1c: val("q4_1c"),
+      q4_1d: val("q4_1d"), q4_1e: val("q4_1e"),
+      q4_2: val("q4_2"), q4_3: val("q4_3"), q4_4: txt("q4_4"),
+      q5_1: val("q5_1"), q5_2: val("q5_2"), q5_3: val("q5_3"),
+      q5_4: val("q5_4"), q5_5: txt("q5_5"), q5_6: val("q5_6"),
+      q5_7: txt("q5_7"), q6_1: val("q6_1"), q6_2: txt("q6_2"),
     };
 
     try {
       const formData = new URLSearchParams();
       formData.append("data", JSON.stringify(data));
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData,
-      });
+      await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: formData });
       document.getElementById("mainForm").style.display = "none";
       document.getElementById("success-msg").style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
-      errMsg.textContent = "Une erreur est survenue. VÃ©rifie ta connexion et rÃ©essaie.";
-      errMsg.style.display = "block";
+    } catch(ex) {
+      err.textContent = "Une erreur est survenue. Vérifie ta connexion et réessaie.";
+      err.style.display = "block";
       btn.disabled = false;
-      btn.textContent = "Envoyer mes rÃ©ponses â†’";
+      btn.textContent = "Envoyer mes réponses →";
     }
   });
 </script>
