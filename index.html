@@ -832,7 +832,7 @@
 </div>
 
 <script>
-  const SCRIPT_URL = "https://formsubmit.co/ajax/abibaesnkrs@gmail.com";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeCCm3xSX6PxXXy0Draj3rPmUklgegZlhF_cnDXcmyGDN0RoxxDRqEMUDVyn2FZF4mcg/exec";
 
   // Toggle "Autre" text field for radio buttons
   function toggleOther(id, radio) {
@@ -987,12 +987,12 @@
     };
 
     try {
-      const res = await fetch(SCRIPT_URL, {
+      await fetch(SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("HTTP " + res.status);
       document.getElementById("mainForm").style.display = "none";
       document.getElementById("success-msg").style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
